@@ -1,11 +1,21 @@
 version: "3.8"
 
+x-build: &dockerfile-dev-build
+  context: .
+  dockerfile: Dockerfile
+
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: *dockerfile-dev-build
     ports:
       - 8888:8888
     volumes:
       - .:/home/appuser
+  builder:
+    build: *dockerfile-dev-build
+    volumes:
+      - .:/home/appuser
+    command:
+      [
+          "./scripts/build-integration-layer.sh"
+      ]
