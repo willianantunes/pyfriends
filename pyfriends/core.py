@@ -11,10 +11,7 @@ from typing import Optional
 from bs4 import BeautifulSoup
 from bs4 import Tag
 
-where_the_files_are = "../seasons"
-folder_seasons = Path(where_the_files_are)
-friends = ["Chandler", "Joey", "Monica", "Phoebe", "Rachel", "Ross"]
-seasons = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]
+folder_seasons = Path(__file__).parent.joinpath("raw_layer")
 
 regex_episode_number = re.compile(r"^\d{2}(\d{2})(-\d{2}(\d{2}))?$", re.IGNORECASE)
 regex_scene_details = re.compile(r"^\[Scene: (.+)\]$", re.IGNORECASE)
@@ -22,9 +19,9 @@ regex_transcription_line = re.compile(r"(\w+): ?(.+)", re.IGNORECASE)
 
 
 class SceneCategory(Enum):
-    OPENING = "before opening"
+    BEFORE_OPENING = "before opening"
     MAIN = "main"
-    CLOSING_CREDITS = "after closing credits"
+    AFTER_CLOSING_CREDITS = "after closing credits"
 
 
 @dataclass(frozen=True)
@@ -66,8 +63,8 @@ def retrieve_episode_details(season: int, episode: Optional[int] = None) -> Gene
         title = soup.find("title").text
         episode = Episode(episode_number, title)
         # Let's get all transcription and extract what we need
-        scene = Scene(SceneCategory.OPENING)
-        scene_category = SceneCategory.OPENING
+        scene = Scene(SceneCategory.BEFORE_OPENING)
+        scene_category = SceneCategory.BEFORE_OPENING
         all_transcriptions = soup.find_all("p")
         for index, transcription_line in enumerate(all_transcriptions):
             text = transcription_line.text.replace("\n", " ")
@@ -83,7 +80,7 @@ def retrieve_episode_details(season: int, episode: Optional[int] = None) -> Gene
                         scene_category = SceneCategory.MAIN
                     after_closing = text_from_previous.startswith("closing credits")
                     if after_closing:
-                        scene_category = SceneCategory.CLOSING_CREDITS
+                        scene_category = SceneCategory.AFTER_CLOSING_CREDITS
                     break
             must_create_new_scene = scene.category != scene_category
             if must_create_new_scene:

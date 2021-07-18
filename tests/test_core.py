@@ -18,9 +18,9 @@ class Test(TestCase):
         self.assertEqual("The One With the Blackout", episode.title)
         total_scenes = 21
         self.assertEqual(total_scenes, len(episode.scenes))
-        scenes_before_opening = [scene for scene in episode.scenes if scene.category == SceneCategory.OPENING]
+        scenes_before_opening = [scene for scene in episode.scenes if scene.category == SceneCategory.BEFORE_OPENING]
         scenes_main = [scene for scene in episode.scenes if scene.category == SceneCategory.MAIN]
-        scenes_after_main = [scene for scene in episode.scenes if scene.category == SceneCategory.CLOSING_CREDITS]
+        scenes_after_main = [scene for scene in episode.scenes if scene.category == SceneCategory.AFTER_CLOSING_CREDITS]
         self.assertTrue(total_scenes == (len(scenes_before_opening) + len(scenes_main) + len(scenes_after_main)))
         # Evaluating before OPENING
         self.assertEqual(2, len(scenes_before_opening))
