@@ -4,8 +4,8 @@ from pyfriends.core import SceneCategory
 from pyfriends.core import retrieve_episode_details
 
 
-class Test(TestCase):
-    def test_retrieve_episode_details_from_0107(self):
+class FirstSeason(TestCase):
+    def test_retrieve_episode_details_from_episode_7(self):
         # Arrange
         season = 1
         episode_number = 7
@@ -44,3 +44,29 @@ class Test(TestCase):
         self.assertEqual(4, len(last_scene.transcriptions))
         self.assertEqual(2, len(list(filter(lambda t: t.character == "Jill", last_scene.transcriptions))))
         self.assertEqual(2, len(list(filter(lambda t: t.character == "Chandler", last_scene.transcriptions))))
+
+
+class TenthSeason(TestCase):
+    def test_retrieve_episode_details_from_episode_17(self):
+        # Arrange
+        season = 10
+        episode_number = 17
+        # Act
+        episodes = list(retrieve_episode_details(season, episode_number))
+        # Assert
+        self.assertEqual(1, len(episodes))
+        episode = episodes[0]
+        self.assertEqual("17-18", episode.number)
+        self.assertEqual("The Last One", episode.title)
+        total_scenes = 25
+        self.assertEqual(total_scenes, len(episode.scenes))
+        scenes_before_opening = [scene for scene in episode.scenes if scene.category == SceneCategory.BEFORE_OPENING]
+        scenes_main = [scene for scene in episode.scenes if scene.category == SceneCategory.MAIN]
+        scenes_after_main = [scene for scene in episode.scenes if scene.category == SceneCategory.AFTER_CLOSING_CREDITS]
+        self.assertTrue(total_scenes == (len(scenes_before_opening) + len(scenes_main) + len(scenes_after_main)))
+        # Evaluating before OPENING
+        self.assertEqual(2, len(scenes_before_opening))
+        # Evaluating after OPENING (which is category MAIN)
+        self.assertEqual(23, len(scenes_main))
+        # Evaluating after CLOSING CREDITS
+        self.assertEqual(0, len(scenes_after_main))

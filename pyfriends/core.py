@@ -61,6 +61,7 @@ def retrieve_episode_details(season: int, episode: Optional[int] = None) -> Gene
         number_1, _, number_2 = episodes_groups
         episode_number = number_1 if number_2 is None else f"{number_1}-{number_2}"
         title = soup.find("title").text
+        title = title.split(" - ")[-1]
         episode = Episode(episode_number, title)
         # Let's get all transcription and extract what we need
         scene = Scene(SceneCategory.BEFORE_OPENING)
