@@ -18,6 +18,9 @@ I'm following the [Delta Architecture](https://databricks.com/blog/2019/08/14/pr
 - [10 minutes to pandas](https://pandas.pydata.org/pandas-docs/stable/user_guide/10min.html)
 - [Cookbook](https://pandas.pydata.org/pandas-docs/stable/user_guide/cookbook.html#cookbook)
 - [Select using sub-query in Pandas](https://stackoverflow.com/a/59989971/3899136)
+- [The Pandas DataFrame: Make Working With Data Delightful](https://realpython.com/pandas-dataframe/)
+- [NEVER grow a DataFrame!](https://stackoverflow.com/a/56746204/3899136)
+- [15 ways to create a Pandas DataFrame](https://towardsdatascience.com/15-ways-to-create-a-pandas-dataframe-754ecc082c17)
 
 ## Credits
 
