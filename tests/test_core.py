@@ -56,7 +56,7 @@ class TenthSeason(TestCase):
         # Assert
         self.assertEqual(1, len(episodes))
         episode = episodes[0]
-        self.assertEqual("17-18", episode.number)
+        self.assertEqual("17/18", episode.number)
         self.assertEqual("The Last One", episode.title)
         total_scenes = 25
         self.assertEqual(total_scenes, len(episode.scenes))
