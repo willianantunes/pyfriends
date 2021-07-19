@@ -1,13 +1,20 @@
-# https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html
-FROM jupyter/scipy-notebook:python-3.9.5
+FROM python:3.9-slim
 
-# LXML, html5lib: so we can use read_html from pandas
-# parsel, beautifulsoup4: alternatives to parse and read html
-RUN conda install --quiet --yes \
-    'lxml=4.6.*' \
-    'html5lib=1.1' \
-    'parsel=1.5.*' \
-    'beautifulsoup4=4.9.*' && \
-    conda clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
+WORKDIR /home/appuser
+
+RUN useradd --user-group --system --uid 1000 appuser && \
+    chown -R appuser /home/appuser
+
+RUN pip install --no-cache-dir --upgrade pip pipenv
+
+COPY --chown=appuser Pipfile Pipfile.lock ./
+
+RUN pipenv install --system --deploy --dev --ignore-pipfile
+
+RUN rm Pipfile Pipfile.lock
+
+COPY --chown=appuser scripts ./scripts
+
+USER appuser
+
+CMD ./scripts/start-jupyter.sh
