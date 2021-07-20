@@ -23,6 +23,11 @@ I'm following the [Delta Architecture](https://databricks.com/blog/2019/08/14/pr
 - [15 ways to create a Pandas DataFrame](https://towardsdatascience.com/15-ways-to-create-a-pandas-dataframe-754ecc082c17)
 - [Python and Parquet Performance](https://blog.datasyndrome.com/python-and-parquet-performance-e71da65269ce)
 
+Querying and plot:
+
+- [Pandas GroupBy: Your Guide to Grouping Data in Python](https://realpython.com/pandas-groupby/)
+- [Plot With Pandas: Python Data Visualization for Beginners](https://realpython.com/pandas-plot-python/)
+
 ## Credits
 
 - [fangj](https://github.com/fangj/friends)
