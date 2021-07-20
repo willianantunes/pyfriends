@@ -4,3 +4,4 @@
 .bash_history
 .ipynb_checkpoints
 .config
+*.parquet

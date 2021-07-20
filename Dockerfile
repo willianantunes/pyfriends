@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM nikolaik/python-nodejs:python3.9-nodejs16-slim
 
 WORKDIR /home/appuser
 
@@ -11,9 +11,13 @@ COPY --chown=appuser Pipfile Pipfile.lock ./
 
 RUN pipenv install --system --deploy --dev --ignore-pipfile
 
+# https://github.com/mwouts/jupytext#install
+RUN jupyter labextension install jupyterlab-jupytext
+
 RUN rm Pipfile Pipfile.lock
 
 COPY --chown=appuser scripts ./scripts
+COPY --chown=appuser pyfriends ./pyfriends
 
 USER appuser
 
