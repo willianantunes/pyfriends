@@ -9,8 +9,10 @@ pandas = "*"
 jupytext = "*"
 jupyterlab = "*"
 pyarrow = "*"
-beautifulsoup4 = "*"
 ipython = "*"
+psycopg2-binary = "*"
+sqlalchemy = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
 
