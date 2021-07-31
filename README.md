@@ -1,8 +1,21 @@
 # PyFriends
 
-This is WIP (Work In Progress). More to come soon! 😉
+This is project is an attempt to improve what is out there about Friends in terms of data. Here you'll find a way to explore all the data available about Friends, either using Pandas or plan SQL.
 
-I'm using the compose service [app](https://github.com/willianantunes/pyfriends/blob/164423598fa12000079cea80eb87f070b44d7c2d/docker-compose.yaml#L4) as the remote interpreter.
+## Getting started it
+
+You can execute `docker-compose up app` and then access the JupyterLab through the link shown in your command-line interface. With this approach, you can use Pandas as you will.
+
+![An animation that shows someone starting the project with JupyterLab](docs/pyfriends-jupyterlab-1.gif)
+
+If you only want to execute SQL, just run `docker-compose up builder` and wait until it's finished. Then you can open your favorite SQL browser and connect to the PostgreSQL database with the following data:
+
+- URL: jdbc:postgresql://localhost:5432/postgres
+- User: postgres
+
+About the entities:
+
+![It has 5 tables which describe how the database was modelled](docs/integration-layer-entities.png)
 
 ## Delta architecture
 
