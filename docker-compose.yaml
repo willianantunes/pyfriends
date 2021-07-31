@@ -22,6 +22,8 @@ services:
       - .:/home/appuser
   builder:
     build: *dockerfile-dev-build
+    depends_on:
+      - db
     volumes:
       - .:/home/appuser
     command:
